@@ -1,0 +1,29 @@
+flowchart TD
+    subgraph Client["🌐 Client"]
+        A["🖥️ Vista UI <br> Rep entrada de l'usuari"] -->|Interacció| B["📡 Client DAO <br> Gestiona peticions al servidor"]
+        B -->|Consulta Model| M["📊 Client Model <br> Lògica de negoci local"]
+        B -->|Retorna dades processades| A
+    end
+
+    subgraph Server["🖥️ Servidor"]
+        B -->|Petició HTTP GET/POST...| C["🌍 Webservice API"]
+        C -->|Consulta Model| N["🛠️ Server Model <br> Lògica de negoci central"]
+        N -->|Consulta DAO| D["📂 Server DAO <br> Accés a dades"]
+        D -->|Consulta BBDD| DB["🗄️ Base de Dades"]
+        DB -->|Retorna dades| D
+        D -->|Retorna objecte processat| N
+        N -->|Retorna resposta| C
+        C -->|Resposta HTTP JSON, XML, etc.| B
+    end
+
+    classDef client fill:#D6EAF8,stroke:#333,stroke-width:2px;
+    classDef server fill:#F9EBEA,stroke:#333,stroke-width:2px;
+    classDef db fill:#F7DC6F,stroke:#333,stroke-width:2px;
+    
+    class A client;
+    class B client;
+    class M client;
+    class C server;
+    class N server;
+    class D server;
+    class DB db;
