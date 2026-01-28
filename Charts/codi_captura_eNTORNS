@@ -1,0 +1,57 @@
+classDiagram
+    Usuari <|-- Administrador
+    Usuari <|-- Client
+    Administrador "1" -- "1..*" Esdeveniment : gestiona
+    Esdeveniment "1" -- "1..*" Entrada : té
+    Client "0..*" -- "0..*" Entrada : compra
+    Entrada "1" -- "1" Pagament : genera
+
+    class Usuari {
+        - nom: String
+        - email: String
+        - contrasenya: String
+        - tipusUsuari: String
+        + registrar()
+        + iniciarSessio()
+        + tancarSessio()
+    }
+
+    class Administrador {
+        + crearEsdeveniment()
+        + modificarEsdeveniment()
+        + eliminarEsdeveniment()
+    }
+
+    class Esdeveniment {
+        - nom: String
+        - descripcio: String
+        - data: Date
+        - ubicacio: String
+        - entradesDisponibles: int
+        + publicar()
+        + actualitzar()
+        + cancel·lar()
+    }
+
+    class Client {
+        + cercarEsdeveniments()
+        + comprarEntrada()
+        + veureEntrades()
+    }
+
+    class Entrada {
+        - preu: float
+        - estat: String
+        + reservar()
+        + vendre()
+        + cancel·lar()
+    }
+
+    class Pagament {
+        - import: float
+        - data: Date
+        - metodePagament: String
+        + processarPagament()
+        + confirmarPagament()
+        + retornarPagament()
+    }
