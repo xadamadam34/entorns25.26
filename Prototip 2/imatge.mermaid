@@ -1,0 +1,47 @@
+classDiagram
+    direction LR
+
+    class User {
+        id : int
+        username : string
+        password : string
+        email : string
+    }
+
+    class Child {
+        id : int
+        child_name : string
+        sleep_average : int
+        treatment_id : int
+        time : int
+    }
+
+    class Tap {
+        id : int
+        child_id : int
+        status_id : int
+        user_id : int
+        init : datetime
+        end : datetime
+    }
+
+    class Status {
+        id : int
+        name : string
+    }
+
+    class Role {
+        id : int
+        type_rol : string
+    }
+
+    class Treatment {
+        id : int
+        name : string
+    }
+
+    User "1" --> "many" Tap : creates
+    Child "1" --> "many" Tap : has
+    Status "1" --> "many" Tap : defines
+    Treatment "1" --> "many" Child : applies_to
+    User "many" -- "many" Child : relation_user_child
