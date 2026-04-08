@@ -1,0 +1,18 @@
+flowchart TD
+    A[Usuario introduce usuario/contraseña] --> B[Cliente envía POST /login]
+    B --> C[Servidor valida credenciales]
+    C --> D{¿Credenciales válidas?}
+
+    D -- Sí --> E[Generar token]
+    E --> F[Guardar token en BBDD]
+    F --> G[Responder con JSON: Usuario + Token]
+
+    G --> H[Cliente solicita /child con token]
+    H --> I[Servidor valida token en BBDD]
+    I --> J{¿Token válido?}
+
+    J -- Sí --> K[Responder con datos del hijo]
+
+    J -- No --> L[Error: Servicio autenticado]
+
+    D -- No --> M[Error: Login incorrecto]
