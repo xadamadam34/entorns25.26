@@ -1,0 +1,26 @@
+sequenceDiagram
+    title Login with Token
+
+    box rgba(173, 216, 230, 0.5) Client
+        participant Client
+    end
+
+    box rgba(144, 238, 144, 0.5) Server
+        participant Server
+    end
+
+    box rgba(255, 228, 181, 0.5) BBDD
+        participant BBDD
+    end
+
+    Client->>Server: Request HTTPS method POST, param: username/password
+    Server-->>BBDD: Generate Token for user and store in User table
+    Server-->>Client: Login OK, generate Token, Response HTTPS Body (JSON) User Info + Token
+
+    Client->>Server: Request HTTPS /child, Header: Token UserA
+    Server->>BBDD: Validate TokenUserA / UserA
+    Server->>Client: If valid, Response HTTPS Body (JSON) Info of UserA’s child
+
+    Client->>Server: Request HTTPS /child, Header: Token UserB
+    Server->>BBDD: TokenUserB not found
+    Server->>Client: Response HTTPS Body (JSON) Error: Authenticated Service
