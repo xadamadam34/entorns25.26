@@ -23,23 +23,23 @@ Secuencia Normal
 6	—	Devuelve datos al servidor
 7	—	Envía datos al cliente
 8	Usuario visualiza los datos	Fin del caso de uso
-Alternativas
+Alternativas: 
 Si el token es inválido → se deniega acceso y se redirige a Login
 Si no tiene permisos → error de autorización
 Si no hay datos → mensaje “sin datos disponibles”
-Excepciones
+Excepciones: 
 #	Situación	Reacción del sistema
 p	Error de conexión	No se procesa la solicitud
 q	Error del servidor	Mensaje de error interno
-Rendimiento
+Rendimiento: 
 
 El sistema debe responder en menos de 2 segundos
 
-Frecuencia
+Frecuencia: 
 
 Aproximadamente 80 veces al día
 
-Importancia
+Importancia: 
 
 Importante
 
@@ -48,6 +48,6 @@ Urgencia
 Puede esperar
 
 Comentarios
-Depende del Login
-Solo roles autorizados pueden acceder
+Depende del Login, 
+Solo roles autorizados pueden acceder, 
 Control de permisos obligatorio
