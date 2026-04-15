@@ -1,18 +1,35 @@
-flowchart TD
-    A[Usuario introduce usuario/contraseña] --> B[Cliente envía POST /login]
-    B --> C[Servidor valida credenciales]
-    C --> D{¿Credenciales válidas?}
+graph TD
+    %% Actores
+    Usuario([Usuario])
+    Cliente([Cliente])
+    Servidor([Servidor])
+    BBDD([BBDD])
 
-    D -- Sí --> E[Generar token]
-    E --> F[Guardar token en BBDD]
-    F --> G[Responder con JSON: Usuario + Token]
+    %% Casos de uso
+    UC1((Introducir credenciales))
+    UC2((Enviar petición login))
+    UC3((Validar credenciales))
+    UC4((Generar token))
+    UC5((Consultar usuario))
+    UC6((Guardar token))
+    UC7((Validar token))
+    UC8((Verificar token))
+    UC9((Proveer acceso a recurso))
 
-    G --> H[Cliente solicita /child con token]
-    H --> I[Servidor valida token en BBDD]
-    I --> J{¿Token válido?}
+    %% Relaciones actor -> caso de uso
+    Usuario --> UC1
+    Cliente --> UC2
+    Servidor --> UC3
+    Servidor --> UC4
+    Servidor --> UC7
+    Servidor --> UC9
+    BBDD --> UC5
+    BBDD --> UC6
+    BBDD --> UC8
 
-    J -- Sí --> K[Responder con datos del hijo]
-
-    J -- No --> L[Error: Servicio autenticado]
-
-    D -- No --> M[Error: Login incorrecto]
+    %% Relaciones entre casos de uso (include)
+    UC2 --> UC3
+    UC3 --> UC5
+    UC4 --> UC6
+    UC9 --> UC7
+    UC7 --> UC8
