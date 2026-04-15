@@ -1,0 +1,22 @@
+flowchart LR
+    %% Actores
+    Tutor([Tutor])
+    Cuidador([Cuidador])
+
+    %% Sistema
+    subgraph Sistema
+        Login((Login))
+        ManageChild((Manage Child))
+        ManageTaps((Manage Taps))
+    end
+
+    %% Relaciones
+    Tutor --> Login
+    Tutor --> ManageChild
+    Tutor --> ManageTaps
+
+    Cuidador --> Login
+    Cuidador --> ManageTaps
+
+    %% Include
+    ManageTaps -->|<<include>>| ManageChild
