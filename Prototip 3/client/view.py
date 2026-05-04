@@ -15,7 +15,7 @@ class ViewConsole:
             option=input("Enter Option: ")
             if(option.isdigit):
                 optionInt=int(option)
-                if(optionInt >0 and optionInt <3):
+                if(optionInt >0 and optionInt <5):
                     return optionInt
             
             print("Error: Introdueix una opció correcta")
@@ -23,7 +23,7 @@ class ViewConsole:
         
     def viewGeneral(self):
         option=-1
-        while(option!=2):
+        while(True):
             option=self.viewShowMenu()
             match option:
                 case 1:
@@ -34,11 +34,21 @@ class ViewConsole:
                     self.viewLoginToken(self.token)
                 case 3:
                     #Childs
-                    print("Childs")
+                    print("View Childs")
+                    self.viewChilds(self.token)
                     #self.viewLogin()
                 case 4:
                     # Quit
+                    exit()
                     print("Adeu, Gràcies per utilitzar l'aplicació")
+
+
+    def viewChilds(self, token):
+        print("View Childs")
+        resposta_child=self.daoClient.childToken(token)
+        if(resposta_child):
+            print(resposta_child)              
+        
 
     def viewLoginToken(self, token):
         print("View LOGIN TOKEN")
@@ -75,7 +85,4 @@ viewConsole=ViewConsole()
 
 viewConsole.viewGeneral()
  
-
-
-
 
