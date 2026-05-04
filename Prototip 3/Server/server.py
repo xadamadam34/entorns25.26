@@ -17,9 +17,9 @@ app = Flask(__name__)
 @app.route('/login', methods=['POST'])
 def login():
     # Token validation if exists
-    print(request.headers)
+    #print(request.headers)
     token=request.headers.get("api-token")
-    print("Token:" , token)
+    #print("Token:" , token)
     user=None
     if(token):
         # comprovar que el token existeix a un usuari
@@ -47,27 +47,30 @@ def login():
 @app.route('/child', methods=['POST'])
 def child():
     token=request.headers.get("api-token")
-    user=None
+    u=None
     if(token):
         # comprovar que el token existeix a un usuari
-        user=userDao.getUserByToken(token)
+        print(token)
+        u=userDao.getUserByToken(token)
+        print("USER:", u)
     
-    if not user:
+    if u:
+        #data = request.get_json()
+        childs=childDao.getChilds(str(u['id']))
+        response = ApiResponse(
+                msg="GetChilds",
+                coderesponse="1",
+                data=childs
+            )
+        return jsonify(asdict(response)),200
+    else: 
         response = ApiResponse(
             msg="Acces not granted",
             coderesponse="0",
             data=""
         )
         return jsonify(asdict(response)),400
-
-    data = request.get_json()
-    childs=childDao.getChilds(user['id'])
-    response = ApiResponse(
-            msg="getChilds",
-            coderesponse="1",
-            data=childs
-        )
-    return jsonify(asdict(response)),200
+    
 
 
 
