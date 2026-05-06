@@ -62,7 +62,28 @@ class DaoUserClient:
                 return user_raw
         else:
             return None
+        
+    def taps(self, token, child_id):
+        URL_peticio = self.base_URL + "/taps"
 
+        headers = {
+            'Content-Type': 'application/json',
+            'api-token': token
+        }
+        body = {
+            "child_id": child_id
+        }
+
+        response = requests.post(URL_peticio, headers=headers, json=body)
+
+        if response.status_code == 200:
+            data = response.json()
+
+            if data['coderesponse'] == '1':
+                return data['data']
+
+        return None
+    
 
 daoClient=DaoUserClient()
 
