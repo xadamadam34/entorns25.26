@@ -1,0 +1,66 @@
+Genera a la carpeta Prototip4/
+
+Genera un Dao que accedeixi a la BBDD per fer 
+Login 
+
+I genera un webservice amb Flask amb els seguents enpoints
+
+End-Points
+Definir els EndPoints necessaris per implementar el Prototip 2
+
+Servei Login
+End-point: /login
+Method: POST
+Estat: Public
+Tipus petició : application/json
+Paramètres:
+
+username : (string) username o email
+password : (string) password
+Resposta Usuari validat Ok:
+http Response Code: 200 ok
+
+{
+  "coderesponse": "1",
+  "data": {
+    "email": "prova@gmail.com",
+    "id": 1,
+    "idrole": 1,
+    "password": "12345",
+    "token": "",
+    "username": "mare"
+  },
+  "msg": "Authenticated"
+}
+Resposta Usuari No validat: http Response Code: 400 ok
+
+{
+     "coderesponse": "0"
+     "msg": "No validat"
+}
+Servei Login per Token
+End-point: /login
+Method: POST
+Estat: Public
+Tipus petició : application/json
+Paramètres Header: 'Authorization' : (string) token
+
+Resposta Usuari validat Ok:
+http Response Code: 200 ok
+
+{
+    "id": 1,
+    "username": "mare",
+    "email": "prova@gmail.com",
+    "token": "token12345",
+    "idrole": "2",
+    "msg": "Usuari Ok"
+    "coderesponse": "1"
+}
+Resposta Usuari No validat:
+http Response Code: 400 ok
+
+{
+    "coderesponse": "0"
+     "msg": "No validat"
+}
