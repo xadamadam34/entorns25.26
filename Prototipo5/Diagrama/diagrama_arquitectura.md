@@ -1,6 +1,11 @@
 ```mermaid
-graph TD
+graph LR
 
-A[Client] -->|HTTP / JSON| B[Backend Flask]
+A[Client / View] -->|HTTP / JSON| B[Flask Server / Controller]
 
-B --> C[(MySQL)]
+B --> C[DAO Layer]
+C --> D[(MySQL)]
+
+D --> C
+C --> B
+B --> A
