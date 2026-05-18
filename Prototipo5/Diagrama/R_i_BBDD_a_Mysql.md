@@ -11,8 +11,17 @@ USUARI {
 RESERVA {
     int id_reserva PK
     date data
-    string hora
+    string hora_inici
+    string hora_fi
     int id_usuari FK
+    int id_schedule FK
+}
+
+SCHEDULE {
+    int id_schedule PK
+    date data
+    string hora_inici
+    string hora_fi
     int id_pista FK
 }
 
@@ -21,7 +30,19 @@ PISTA {
     string nom
     string tipus
     boolean disponible
+    int id_centre FK
 }
 
+CENTRE {
+    int id_centre PK
+    string nom
+    string ubicacio
+    string ciutat
+}
+
+%% RELACIONS
+
 USUARI ||--o{ RESERVA : fa
-PISTA ||--o{ RESERVA : te
+RESERVA }o--|| SCHEDULE : usa
+SCHEDULE }o--|| PISTA : defineix
+PISTA }o--|| CENTRE : pertany
