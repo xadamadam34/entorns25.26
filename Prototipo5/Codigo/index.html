@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reserva Pistes Esportives</title>
+  <link rel="stylesheet" href="static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🏟️ Reserva de Pistes Esportives</h1>
+
+    <!-- LOGIN -->
+    <div id="seccio-login" class="card">
+      <h2>Iniciar Sessió</h2>
+      <input type="email" id="login-email" placeholder="Correu electrònic" />
+      <input type="password" id="login-password" placeholder="Contrasenya" />
+      <button onclick="login()">Entrar</button>
+      <p id="login-error" class="error"></p>
+      <p>No tens compte? <a href="#" onclick="mostrarRegistre()">Registra't</a></p>
+    </div>
+
+    <!-- REGISTRE -->
+    <div id="seccio-registre" class="card" style="display:none">
+      <h2>Registre</h2>
+      <input type="text"     id="reg-nom"   placeholder="Nom complet" />
+      <input type="email"    id="reg-email" placeholder="Correu electrònic" />
+      <input type="password" id="reg-pass"  placeholder="Contrasenya" />
+      <button onclick="registre()">Registrar-se</button>
+      <p id="reg-error" class="error"></p>
+      <p>Ja tens compte? <a href="#" onclick="mostrarLogin()">Inicia sessió</a></p>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="seccio-dashboard" style="display:none">
+      <div class="topbar">
+        <span id="benvinguda"></span>
+        <button onclick="logout()">Tancar sessió</button>
+      </div>
+
+      <div class="grid">
+        <!-- Llistat de pistes -->
+        <div class="card">
+          <h2>Pistes disponibles</h2>
+          <div id="llista-pistes"></div>
+        </div>
+
+        <!-- Formulari reserva -->
+        <div class="card">
+          <h2>Nova Reserva</h2>
+          <select id="sel-pista" onchange="carregarSchedules()">
+            <option value="">-- Selecciona pista --</option>
+          </select>
+          <select id="sel-schedule">
+            <option value="">-- Selecciona horari --</option>
+          </select>
+          <button onclick="crearReserva()">Reservar</button>
+          <p id="reserva-msg" class="error"></p>
+        </div>
+      </div>
+
+      <!-- Les meves reserves -->
+      <div class="card">
+        <h2>Les meves reserves</h2>
+        <table id="taula-reserves">
+          <thead>
+            <tr>
+              <th>Pista</th><th>Tipus</th><th>Centre</th>
+              <th>Data</th><th>Horari</th><th>Acció</th>
+            </tr>
+          </thead>
+          <tbody id="cos-reserves"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="static/app.js"></script>
+</body>
+</html>
