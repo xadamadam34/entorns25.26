@@ -1,4 +1,4 @@
-# Projecte DAM2 - Reserva de Pistes Esportives
+# Projecte ENTORNS- ADAM i DANIAL - Reserva de Pistes Esportives
 
 ---
 
