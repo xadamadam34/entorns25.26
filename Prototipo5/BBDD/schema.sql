@@ -21,3 +21,25 @@ CREATE TABLE RESERVA (
   FOREIGN KEY (id_usuari) REFERENCES USUARI(id_usuari),
   FOREIGN KEY (id_pista) REFERENCES PISTA(id_pista)
 );
+
+CREATE TABLE SCHEDULE (
+  id_schedule INT AUTO_INCREMENT PRIMARY KEY,
+  id_pista INT,
+  hora_inici TIME,
+  hora_fi TIME,
+  disponible BOOLEAN,
+  FOREIGN KEY (id_pista) REFERENCES PISTA(id_pista)
+);
+
+CREATE TABLE CENTRE (
+  id_centre INT AUTO_INCREMENT PRIMARY KEY,
+  id_usuari INT,
+  id_pista INT,
+  id_schedule INT,
+  data DATE,
+  hora_inici TIME,
+  hora_fi TIME,
+  FOREIGN KEY (id_usuari) REFERENCES USUARI(id_usuari),
+  FOREIGN KEY (id_pista) REFERENCES PISTA(id_pista),
+  FOREIGN KEY (id_schedule) REFERENCES SCHEDULE(id_schedule)
+);
